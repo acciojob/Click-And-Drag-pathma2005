@@ -1,36 +1,37 @@
-// Select the container
 const slider = document.querySelector('.items');
 
-let isDown = false;    // Whether mouse is currently pressed
-let startX;            // Starting X position of mouse
-let scrollLeft;        // How far scrolled before drag started
+let isDown = false;
+let startX;
+let scrollLeft;
 
-// When mouse is pressed down
+// Mousedown
 slider.addEventListener('mousedown', (e) => {
   isDown = true;
-  slider.classList.add('active'); // Add grabbing effect
-  startX = e.pageX - slider.offsetLeft;
+  slider.classList.add('active');
+  startX = e.pageX;
   scrollLeft = slider.scrollLeft;
 });
 
-// When mouse leaves the area
+// Mouseleave
 slider.addEventListener('mouseleave', () => {
   isDown = false;
   slider.classList.remove('active');
 });
 
-// When mouse is released
+// Mouseup
 slider.addEventListener('mouseup', () => {
   isDown = false;
   slider.classList.remove('active');
 });
 
-// When mouse moves while dragging
+// Mousemove
 slider.addEventListener('mousemove', (e) => {
-  if (!isDown) return; // Stop function if not dragging
+  if (!isDown) return;
   e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
-  const walk = (x - startX) * 2; // Speed multiplier
+
+  // Calculate drag distance
+  const walk = (e.pageX - startX) * 2;
+
+  // Update scroll position
   slider.scrollLeft = scrollLeft - walk;
 });
-
