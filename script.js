@@ -21,10 +21,11 @@ slider.addEventListener('mouseup', () => {
 });
 
 slider.addEventListener('mousemove', (e) => {
-  if (!isDown) return; // stop function if not holding mouse
+  if (!isDown) return; // Only run when mouse is down
   e.preventDefault();
   const x = e.pageX - slider.offsetLeft;
-  const walk = x - startX; // distance moved
-  slider.scrollLeft = scrollLeft - walk; // move scroll
+  const walk = (x - startX) * 1; // speed multiplier
+  slider.scrollLeft = scrollLeft - walk;
 });
+
 
